@@ -1,6 +1,6 @@
-# Welcome to your Expo app 👋
+# Welcome to GithubRate ⭐
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+GithubRate es una aplicación desarrollada con [Expo](https://expo.dev) que permite a los usuarios calificar su experiencia con un producto o servicio en GitHub.
 
 ## Get started
 
@@ -16,35 +16,60 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
     npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+## 📷 Screenshots
+![home rate](assets/images/image.png)
+![profile](assets/images/image-1.png)
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 🚀 Features
+- **Registro de usuarios**: Los usuarios pueden registrarse y crear su perfil.
+- **Calificaciones**: Permite a los usuarios calificar productos o servicios.
+- **Historial de calificaciones**: Los usuarios pueden ver su historial de calificaciones.
+- **Interfaz intuitiva**: Diseño limpio y fácil de usar.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 🛠️ Installation
 
-## Get a fresh project
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/letalandroid/github-rate.git
+   ```
+2. Navega al directorio del proyecto:
+   ```bash
+   cd github-rate
+   ```
+3. Instala las dependencias:
+   ```bash
+   npm install
+   ```
+4. Inicia el servidor de desarrollo:
+   ```bash
+   npx expo start
+   ```
+## 📱 Usage
 
-When you're ready, run:
+1. Abre la aplicación en tu dispositivo o en un simulador.
+2. Crea una cuenta o inicia sesión.
+3. Califica tus productos o servicios favoritos en GitHub.
+4. Revisa tus calificaciones y mejora tu experiencia.
 
-```bash
-npm run reset-project
-```
+## ⚙️ Technologies Used
+- **React Native**: Para la construcción de la interfaz de usuario.
+- **Expo**: Para el desarrollo y despliegue rápido.
+- **AsyncStorage**: Para almacenamiento local.
+- **Fetch API**: Para realizar llamadas a la API.
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 🤝 Contributing
+Si deseas contribuir a este proyecto, por favor sigue estos pasos:
+1. Haz un fork del repositorio.
+2. Crea tu rama: `git checkout -b feature/NombreDeTuCaracteristica`.
+3. Realiza tus cambios y haz un commit: `git commit -m 'Añadido NombreDeTuCaracteristica'`.
+4. Sube tus cambios: `git push origin feature/NombreDeTuCaracteristica`.
+5. Abre un Pull Request.
 
-## Learn more
+## 📄 License
+Este proyecto está bajo la [MIT License](LICENSE).
 
-To learn more about developing your project with Expo, look at the following resources:
+## 📝 Author
+- **Letalandroid** - [GitHub](https://github.com/letalandroid)
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 🙏 Agradecimientos
+Quiero agradecer a [DenverCoder1](https://github.com/DenverCoder1/github-readme-streak-stats) por haber proporcionado el proyecto [GitHub Readme Streak Stats](https://github.com/DenverCoder1/github-readme-streak-stats). Gracias a su trabajo, pude utilizar su API e integrarla `on this project`.
