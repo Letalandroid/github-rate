@@ -17,7 +17,7 @@ GithubRate es una aplicación desarrollada con [Expo](https://expo.dev) que perm
    ```
 
 ## 📷 Screenshots
-![home rate](assets/images/image.png)
+![Home rate](assets/images/image.png)
 ![Loading](assets/images/image3.png)
 ![DenverCoder1](assets/images/image2.png)
 
