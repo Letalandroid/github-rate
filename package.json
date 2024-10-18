@@ -39,7 +39,8 @@
     "react-native-spinkit": "^1.5.1",
     "react-native-web": "~0.19.10",
     "react-spinners": "^0.14.1",
-    "expo-updates": "~0.25.27"
+    "expo-updates": "~0.25.27",
+    "@expo/metro-runtime": "~3.2.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
