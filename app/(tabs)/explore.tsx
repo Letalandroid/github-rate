@@ -19,7 +19,7 @@ export default function TabTwoScreen() {
       }
       const json = await response.json();
       setData(json);
-    } catch (err) {
+    } catch (err: any) {
       setError(err);
     } finally {
       setLoading(false);
