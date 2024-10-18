@@ -37,8 +37,6 @@ export default function HomeScreen() {
       const storedUsername = await AsyncStorage.getItem('username');
       if (storedUsername) {
         setUsername(storedUsername);
-      } else {
-        alert('Error al obtener el username')
       }
     } catch (error) {
       alert('Error al obtener el username')
