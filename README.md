@@ -1,6 +1,6 @@
 # Welcome to GithubRate ⭐
 
-GithubRate es una aplicación desarrollada con [Expo](https://expo.dev) que permite a los usuarios calificar su experiencia con un producto o servicio en GitHub.
+GithubRate es una aplicación desarrollada con [Expo](https://expo.dev) que permite a los usuarios obtener la racha de contribuciones en GitHub.
 
 ## Get started
 
@@ -23,7 +23,6 @@ GithubRate es una aplicación desarrollada con [Expo](https://expo.dev) que perm
 
 ## 🚀 Features
 - **Registro de usuarios**: Los usuarios pueden registrarse y crear su perfil.
-- **Calificaciones**: Permite a los usuarios calificar productos o servicios.
 - **Historial de calificaciones**: Los usuarios pueden ver su historial de calificaciones.
 - **Interfaz intuitiva**: Diseño limpio y fácil de usar.
 
