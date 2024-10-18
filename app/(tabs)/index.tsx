@@ -1,70 +1,154 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, Image, Pressable, Platform } from 'react-native';
+import { Colors } from '../../constants/Colors';
+import { useEffect, useState } from 'react';
+import Spinner from 'react-native-loading-spinner-overlay';
+import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+const gh_icon = require('../../assets/images/gh_white.png');
+const fire = require('../../assets/images/fire.png');
 
 export default function HomeScreen() {
+
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const navigation = useNavigation();
+  const [username, setUsername] = useState('letalandroid');
+
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(`https://streak-stats-getinfo.onrender.com/getAll?username=${username}`);
+      if (!response.ok) {
+        alert('Network response was not ok');
+        return;
+      }
+      const json = await response.json();
+      setData(json);
+      await loadUsername();
+    } catch (err) {
+      setError(err);
+    }
+  };
+
+  const loadUsername = async () => {
+    try {
+      const storedUsername = await AsyncStorage.getItem('username');
+      if (storedUsername) {
+        setUsername(storedUsername);
+      } else {
+        alert('Error al obtener el username')
+      }
+    } catch (error) {
+      alert('Error al obtener el username')
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const loadData = async () => {
+      await loadUsername();
+      fetchData();
+    };
+    loadData();
+  }, []);
+
+  useEffect(() => {
+    if (username) {
+      fetchData();
+    }
+  }, [username]);
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
+    loading ? (
+      <View style={styles.container}>
+        <StatusBar
+          barStyle="default"
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+        <Spinner
+        visible={loading}
+        textContent={'Loading...'}
+        />
+      </View>
+    ) : (
+      <View style={styles.container}>
+        <Pressable style={styles.gh_img} onPress={() => navigation.navigate('(tabs)/explore')}>
+            <Image style={{width: 65, height: 65, borderRadius: 100}} source={{ uri: `https://github.com/${username}.png` }} />
+        </Pressable>
+        <Text style={styles.title}>🔥 {username} 🔥</Text>
+        <View>
+          <Image source={fire} style={styles.fire_img} />
+          <View style={styles.cont_txt_streak}>
+            <Text style={styles.txt_streak}>{data?.streaks[0].text[0] ?? 0}</Text>
+          </View>
+        </View>
+        <Pressable style={styles.btn} onPress={() => fetchData()}>
+          <Text style={styles.btnText}>Recargar</Text>
+        </Pressable>
+        <StatusBar
+          barStyle="light-content"
+        />
+      </View>
+    )
   );
 }
 
+const isIOS = Platform.OS === 'ios';
+
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
+  container: {
+    paddingTop: StatusBar.currentHeight,
+    flex: 1,
+    backgroundColor: Colors.dark.background,
+    justifyContent: 'center',
     alignItems: 'center',
-    gap: 8,
+    gap: 20
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
+  gh_img: {
     position: 'absolute',
+    alignSelf: 'center',
+    top: isIOS ? 50 : (10 + (StatusBar.currentHeight != undefined ? StatusBar.currentHeight : 0)),
+  },
+  title: {
+    color: Colors.dark.text,
+    fontWeight: 'bold',
+    fontSize: 28,
+  },
+  fire_img: {
+    width: 150,
+    height: 150,
+  },
+  btn: {
+    backgroundColor: Colors.dark.tint,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 10,
+    alignItems: 'center', // Centra el texto horizontalmente
+  },
+  btnText: {
+    color: Colors.dark.text,
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  txt_streak: {
+    color: Colors.dark.fire,
+    backgroundColor: Colors.dark.text,
+    fontWeight: 'bold',
+    fontSize: 25,
+    textAlign: 'center',
+  },
+  cont_txt_streak: {
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+    zIndex: 5,
+    paddingHorizontal: 12,
+    paddingVertical: 3,
+    backgroundColor: Colors.dark.text,
+    borderWidth: 5,
+    borderColor: Colors.dark.fire,
+    borderRadius: 100
   },
 });
