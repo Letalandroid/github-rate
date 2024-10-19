@@ -1,6 +1,6 @@
 # Welcome to GithubRate ⭐
 
-GithubRate es una aplicación desarrollada con [Expo](https://expo.dev) que permite a los usuarios obtener la racha de contribuciones en GitHub.
+GithubRate es una aplicación desarrollada con [Expo](https://expo.dev) que permite a los usuarios obtener la racha de contribuciones en GitHub ⭐️
 
 ## Get started
 
